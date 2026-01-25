@@ -157,7 +157,7 @@ export default function Cart() {
                       </Link>
 
                       <button
-                        onClick={() => handleRemoveItem(item._id)}
+                        onClick={() => handleRemoveItem(product?._id || item?.product?._id || item?.product)}
                         className="flex items-center px-3 py-2 text-red-500 hover:text-red-700 border border-red-500 hover:bg-red-50 rounded-md transition"
                       >
                         <FaTrash className="mr-2" />
