@@ -1,0 +1,37 @@
+# Node
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Build outputs
+frontend/dist/
+frontend/build/
+backend/build/
+
+# Vite
+node_modules/.vite
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Mac
+.DS_Store
+
+# Vercel
+.vercel/
+
+# Coverage
+coverage/
+
+# Other
+.idea/
+.vscode/
+*.log
