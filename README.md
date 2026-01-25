@@ -71,7 +71,7 @@ Open the frontend: `http://localhost:5173`
 
 - Sign up and log in via the auth pages. The frontend stores the JWT in `localStorage` as `token` and sends it as `Authorization: Bearer <token>`.
 - Add items to the cart (cart endpoints are protected and require auth).
-- Admin pages are protected and require an admin user; use the seed admin script in `backend/utils/seedAdminUser.js` if needed.
+
 
 ## Logo & Favicon
 - The site uses an MS logo and an SVG favicon (`frontend/public/ms-favicon.svg`), and the primary logo is available as `frontend/src/assets/ms-logo.svg`.
