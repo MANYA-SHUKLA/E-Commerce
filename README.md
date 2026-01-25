@@ -1,4 +1,4 @@
-# Chlothzy E-Commerce (Local Dev)
+# Chlothzy E-Commerce 
 
 A small e-commerce web application used to demonstrate a full-stack React + Express + MongoDB setup. The site is branded "Chlothzy" and maintained by manya shukla.
 
