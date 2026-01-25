@@ -96,8 +96,52 @@ const removeFromCart = async (req, res) => {
   }
 };
 
+// @desc    Update quantity of an item in cart
+// @route   PUT /api/cart/updateQuantity
+const updateQuantity = async (req, res) => {
+  const { productId, quantity } = req.body;
+
+  try {
+    if (!req.user?._id) {
+      return res.status(401).json({ message: 'Not authorized' });
+    }
+
+    if (!productId) {
+      return res.status(400).json({ message: 'productId is required' });
+    }
+
+    const qty = Number(quantity);
+    if (!Number.isFinite(qty) || qty < 1) {
+      return res.status(400).json({ message: 'quantity must be a number >= 1' });
+    }
+
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const itemIndex = user.cart.findIndex(
+      (item) => item.product.toString() === productId
+    );
+
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: 'Item not found in cart' });
+    }
+
+    user.cart[itemIndex].quantity = qty;
+    await user.save();
+
+    const updatedUser = await User.findById(req.user._id).populate('cart.product');
+    return res.json(updatedUser.cart);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server Error' });
+  }
+};
+
 module.exports = {
   getCart,
   addToCart,
   removeFromCart,
+  updateQuantity,
 };

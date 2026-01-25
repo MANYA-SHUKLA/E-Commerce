@@ -11,12 +11,14 @@ export default function Cart() {
   const fetchCart = async () => {
     try {
       const data = await getCart();
-      if (data?.items) {
-        setCart(data.items);
-      } else if (Array.isArray(data)) {
+      // Backend currently returns the cart as an array (user.cart)
+      // but keep this flexible in case the API later wraps it.
+      if (Array.isArray(data)) {
         setCart(data);
-      } else if (data) {
-        setCart([data]);
+      } else if (data?.cart && Array.isArray(data.cart)) {
+        setCart(data.cart);
+      } else if (data?.items && Array.isArray(data.items)) {
+        setCart(data.items);
       } else {
         setCart([]);
       }
