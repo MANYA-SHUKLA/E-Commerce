@@ -21,7 +21,7 @@ app.use(express.json());
 
 // CORS (dev + prod)
 const allowedOrigins = new Set([
-  process.env.CLIENT_URL, // e.g. https://rajchlothzy.vercel.app
+  process.env.CLIENT_URL, 
   'http://localhost:5173',
   'http://127.0.0.1:5173',
 ]);
