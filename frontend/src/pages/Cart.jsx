@@ -7,6 +7,7 @@ export default function Cart() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const fetchCart = async () => {
     try {
@@ -36,12 +37,19 @@ export default function Cart() {
   const handleRemoveItem = async (productId) => {
     try {
       await removeFromCart(productId);
+      setSuccessMessage("Item removed successfully.");
       fetchCart();
     } catch (err) {
       console.error("Error removing item:", err);
       setError("Failed to remove item.");
     }
   };
+
+  useEffect(() => {
+    if (!successMessage) return;
+    const t = setTimeout(() => setSuccessMessage(""), 2500);
+    return () => clearTimeout(t);
+  }, [successMessage]);
 
   const handleQuantityChange = async (productId, newQuantity) => {
     if (newQuantity < 1) return;
@@ -94,6 +102,13 @@ export default function Cart() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      {successMessage && (
+        <div className="fixed top-5 right-5 z-50">
+          <div className="bg-green-600 text-white px-4 py-3 rounded-lg shadow-lg text-sm font-medium">
+            {successMessage}
+          </div>
+        </div>
+      )}
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Your Shopping Cart</h1>
 
