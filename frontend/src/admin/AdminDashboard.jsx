@@ -188,7 +188,7 @@ export default function AdminProducts() {
                       {product.category}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      ₹{product.price.toFixed(2)}
+                      ₹{(Number.isFinite(Number(product?.price)) ? Number(product.price) : 0).toFixed(2)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {product.stock}

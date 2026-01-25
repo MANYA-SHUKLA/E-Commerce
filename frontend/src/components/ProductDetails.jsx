@@ -56,7 +56,7 @@ const ProductDetails = () => {
 
   const toggleWishlist = () => {
     setIsWishlisted(!isWishlisted);
-    // Here you would typically call an API to update the wishlist
+  
   };
 
   if (loading) {
@@ -85,14 +85,11 @@ const ProductDetails = () => {
       </div>
     );
   }
-
-  // Converted price
-  const price = (product.price).toFixed(2);
+  const price = Number.isFinite(Number(product?.price)) ? Number(product.price).toFixed(2) : '0.00';
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Breadcrumb Navigation */}
         <nav className="flex mb-6" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li>
@@ -115,17 +112,15 @@ const ProductDetails = () => {
 
         <div className="bg-white shadow rounded-lg overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
-            {/* Product Images */}
             <div className="space-y-4">
-              {/* Main Image */}
+      
               <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden">
                 <img
                   src={product.imageUrl || "https://via.placeholder.com/600"}
                   alt={product.name}
                   className="w-full h-full "
                 />
-                
-                {/* Navigation Arrows */}
+              
                 {product.imageUrl?.length > 1 && (
                   <>
                     <button
@@ -144,7 +139,7 @@ const ProductDetails = () => {
                 )}
               </div>
 
-              {/* Thumbnail Gallery */}
+            
               {Array.isArray(product.imageUrl) && product.imageUrl.length > 1 && (
                 <div className="grid grid-cols-4 gap-2">
                   {product.imageUrl.map((img, index) => (
@@ -164,7 +159,7 @@ const ProductDetails = () => {
               )}
             </div>
 
-            {/* Product Info */}
+ 
             <div className="space-y-6">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
@@ -207,7 +202,7 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              {/* Quantity and Actions */}
+
               <div className="border-t border-gray-200 pt-6">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="flex items-center border border-gray-300 rounded-md">

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import API from '../api/axios';
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
@@ -14,8 +13,6 @@ import image3 from '../assets/image3.png';
 import { useContext } from 'react';
 import { UserContext } from '../context/userContext';
 
-
-// New Arrivals Slider Component
 const NewArrivalsSlider = () => {
   const categories = [
     { label: 'Men', image: image3 },
@@ -34,7 +31,7 @@ const NewArrivalsSlider = () => {
   
   return (
     <div className="flex flex-col lg:flex-row h-auto lg:h-[90vh] min-h-[400px] w-full overflow-hidden p-5">
-      {/* Left Side Text - Now on top for mobile, left for desktop */}
+    
       <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start p-6 md:p-10 bg-white order-1 lg:order-none">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-center lg:text-left">
           New Arrivals
@@ -53,7 +50,7 @@ const NewArrivalsSlider = () => {
         </AnimatePresence>
       </div>
 
-      {/* Right Side Image - Now full width on mobile, half on desktop */}
+
       <div className="w-full lg:w-1/2 relative h-64 md:h-80 lg:h-full order-0 lg:order-none">
         <AnimatePresence mode="wait">
           <motion.img
@@ -71,8 +68,6 @@ const NewArrivalsSlider = () => {
     </div>
   );
 };
-
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -117,6 +112,11 @@ const categoryColors = {
 };
 
 export default function Home() {
+  const formatPrice = (value) => {
+    const n = Number(value);
+    return Number.isFinite(n) ? n.toFixed(2) : '0.00';
+  };
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -175,10 +175,7 @@ export default function Home() {
 
   return (
     <div className="font-mono">
-      {/* New Arrivals Slider at the top */}
       <NewArrivalsSlider />
-
-      {/* Products Section */}
       <motion.div
         initial="hidden"
         animate="visible"
@@ -246,7 +243,7 @@ export default function Home() {
                   <Link to={`/products/${product._id}`} className="text-lg font-bold text-gray-800 hover:text-black">
                     {product.name}
                   </Link>
-                  <p className="text-lg font-bold text-black">₹{(product.price).toFixed(2)}</p>
+                  <p className="text-lg font-bold text-black">₹{formatPrice(product?.price)}</p>
                 </div>
 
                 {product.brand && (

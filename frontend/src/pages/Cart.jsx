@@ -56,8 +56,10 @@ export default function Cart() {
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => {
-      const price = item.product?.price || item.price;
-      return total + (price * item.quantity);
+      const rawPrice = item.product?.price ?? item.price;
+      const price = Number(rawPrice);
+      const qty = Number(item.quantity);
+      return total + ((Number.isFinite(price) ? price : 0) * (Number.isFinite(qty) ? qty : 0));
     }, 0).toFixed(2);
   };
 
@@ -97,8 +99,11 @@ export default function Cart() {
           <div className="divide-y divide-gray-200">
             {cart.map(item => {
               const product = item.product || item;
-              const price = product.price;
-              const totalPrice = (price * item.quantity).toFixed(2);
+              const priceNum = Number(product?.price);
+              const safePrice = Number.isFinite(priceNum) ? priceNum : 0;
+              const qtyNum = Number(item.quantity);
+              const safeQty = Number.isFinite(qtyNum) ? qtyNum : 0;
+              const totalPrice = (safePrice * safeQty).toFixed(2);
 
               return (
                 <div key={item._id || product._id} className="p-6 flex flex-col sm:flex-row">
@@ -118,7 +123,7 @@ export default function Cart() {
                       </div>
                       <div className="flex flex-col items-end">
                         <p className="text-lg font-semibold text-gray-900">₹{totalPrice}</p>
-                        <p className="text-sm text-gray-500">₹{price.toFixed(2)} × {item.quantity}</p>
+                        <p className="text-sm text-gray-500">₹{safePrice.toFixed(2)} × {item.quantity}</p>
                       </div>
                     </div>
 
