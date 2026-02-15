@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../api/axios';
-
 export default function AddProduct() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -19,9 +18,7 @@ export default function AddProduct() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
   const categories = ['Men', 'Women', 'Accessories', 'Footwear', 'Kids'];
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
