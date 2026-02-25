@@ -1,6 +1,4 @@
 const Product = require('../models/Product');
-
-// to get all products
 const getAllAdminProducts = async (req, res) => {
     console.warn("rtest");
     try {
@@ -11,8 +9,6 @@ const getAllAdminProducts = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
-
-// patch to toggle product visibility
 const updateProductVisibility = async (productId, visibility) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(
@@ -25,8 +21,6 @@ const updateProductVisibility = async (productId, visibility) => {
         throw new Error('Failed to update product visibility: ' + err.message);
     }
 };
-
-// Additional product-related functions can be added here
 const addProduct = async (req, res) => {
     try {
         const newProduct = new Product(req.body);
